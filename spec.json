@@ -1,0 +1,6 @@
+{
+    "ramGB": 16,
+    "cpuCores":4,
+    "minResolution":[1920,1080],
+    "gpuKeyword":"NVIDIA"
+}
