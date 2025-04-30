@@ -11,6 +11,6 @@
         "cpu_keywords": ["Intel Core i7", "AMD Ryzen 7", "Model 141"],
         "gpu_vram_gb": 4,
         "os_name": "Windows",
-        "disk_gb":480
+        "disk_gb":450
     }
 }
