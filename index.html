@@ -28,10 +28,20 @@
       .then(([data, krav]) => {
         const res = [];
         res.push({ navn: "Operativsystem", ok: data.os_name === krav.os_name, detalj: data.os_name });
+        console.log(data.os_name,krav.os_name,data.os_name === krav.os_name);
+
         res.push({ navn: "RAM", ok: data.ram_gb >= krav.ram_gb, detalj: `${data.ram_gb} GB` });
+        console.log(data.ram_gb,krav.ram_gb,data.ram_gb >= krav.ram_gb);
+        
         res.push({ navn: "CPU", ok: krav.cpu_keywords.some(k => data.cpu.includes(k)), detalj: data.cpu });
+        console.log(krav.cpu_keywords.some(k => data.cpu.includes(k)));
+
         res.push({ navn: "GPU (VRAM)", ok: data.gpu_vram_gb >= krav.gpu_vram_gb, detalj: `${data.gpu_name} (${data.gpu_vram_gb} GB)` });
+        console.log(data.gpu_vram_gb,krav.gpu_vram_gb,data.gpu_vram_gb >= krav.gpu_vram_gb);
+
         res.push({ navn: "Diskplass", ok: data.disk_gb >= krav.disk_gb, detalj: `${data.disk_gb} GB` });
+        console.log(data.disk_gb,krav.disk_gb,data.disk_gb >= krav.disk_gb);
+
         const ul = document.getElementById("resultat");
         ul.innerHTML = "";
         res.forEach(r => {
