@@ -1,14 +1,14 @@
 {
     "design":{
         "ram_gb": 8,
-        "cpu_keywords": ["Intel Core i7", "AMD Ryzen 7", "Model 141"],
+        "cpu_keywords": ["Intel Core i7", "AMD Ryzen 7", "Model 141", "i7-11800H"],
         "gpu_vram_gb": 1,
         "os_name": "Windows",
         "disk_gb":450
     },
     "teknologi":{
         "ram_gb": 16,
-        "cpu_keywords": ["Intel Core i7", "AMD Ryzen 7", "Model 141"],
+        "cpu_keywords": ["Intel Core i7", "AMD Ryzen 7", "Model 141", "i7-11800H"],
         "gpu_vram_gb": 4,
         "os_name": "Windows",
         "disk_gb":450
