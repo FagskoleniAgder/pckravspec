@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Systemkrav-sjekk</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    .ok { color: green; font-weight: bold; }
+    .fail { color: red; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Resultat av systemanalyse</h1>
+  <label for="studie">Velg studieretning:</label>
+  <select id="studie">
+    <option value="design">Design</option>
+    <option value="teknologi">Teknologi</option>
+  </select>
+  <button onclick="lastResultat()">Last sjekk</button>
+  <ul id="resultat">Ingen sjekk utført enda.</ul>
+  <script>
+    function lastResultat() {
+      const valgtStudie = document.getElementById("studie").value;
+      Promise.all([
+        fetch('/api/info').then(res => res.json()),
+        fetch(`/api/spec?studie=${valgtStudie}`).then(res => res.json())
+      ])
+      .then(([data, krav]) => {
+        const res = [];
+        res.push({ navn: "Operativsystem", ok: data.os_name === krav.os_name, detalj: data.os_name });
+        res.push({ navn: "RAM", ok: data.ram_gb >= krav.ram_gb, detalj: `${data.ram_gb} GB` });
+        res.push({ navn: "CPU", ok: krav.cpu_keywords.some(k => data.cpu.includes(k)), detalj: data.cpu });
+        res.push({ navn: "GPU (VRAM)", ok: data.gpu_vram_gb >= krav.gpu_vram_gb, detalj: `${data.gpu_name} (${data.gpu_vram_gb} GB)` });
+        res.push({ navn: "Diskplass", ok: data.disk_gb >= krav.disk_gb, detalj: `${data.disk_gb} GB` });
+        const ul = document.getElementById("resultat");
+        ul.innerHTML = "";
+        res.forEach(r => {
+          const li = document.createElement("li");
+          li.innerHTML = `${r.ok ? "✅" : "❌"} <span class="${r.ok ? "ok" : "fail"}">${r.navn}</span>: ${r.detalj}`;
+          ul.appendChild(li);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
